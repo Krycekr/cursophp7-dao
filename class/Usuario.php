@@ -48,10 +48,52 @@
 			}
 		}
 
+		public static function getList(){ // Lista a tabela do banco de dados, organizado pelo login
+
+			$sql = new Sql();
+
+			return $sql->select("select * from tb_usuarios order by deslogin");
+
+		}
+
+		public static function search($login){ // Busca no banco por parte de texto, neste caso no campo usuario
+
+			$sql = new Sql();
+
+			return $sql->select("select * from tb_usuarios where deslogin like :SEARCH order by deslogin",array(
+				':SEARCH'=>"%".$login."%"
+			));
+
+		}
+
+		public function login($login,$password){
+
+			$sql = new Sql();
+
+			$results = $sql->select("select * from tb_usuarios where deslogin = :LOGIN and dessenha = :PASSWORD", array(
+				":LOGIN"=>$login,
+				":PASSWORD"=>$password
+			));
+
+			if(count($results)>0){
+				$row = $results[0];
+				$this->setIdusuario($row['idusuario']);
+				$this->setDeslogin($row['deslogin']);
+				$this->setDessenha($row['dessenha']);
+				$this->setDtcadastro(new DateTime($row['dtcadastro']));
+			}else{
+
+				throw new Exception("Login e/ ou senha invalidos!");
+				
+
+			}
+
+		}
+
 		public function __toString(){
 			return json_encode(array(
 				"idusuario"=>$this->getIdusuario(),
-				"deslogin"=>$this->getDessenha(),
+				"deslogin"=>$this->getDeslogin(),
 				"dessenha"=>$this->getDessenha(),
 				"dtcadastro"=>$this->getDtcadastro()->format("d/m/Y H:i:s")
 			));
