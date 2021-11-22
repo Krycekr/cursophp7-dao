@@ -38,10 +38,23 @@
 	// FIM Carrega uma lista de users buscando pelo login
 
 
-	$usuario = new Usuario();
+	// busca um susuario com os parametros de user e password
+	// $usuario = new Usuario();
 
 
-	$usuario->login("joao","888888");
+	// $usuario->login("joao","888888");
 
-	echo $usuario;
+	// echo $usuario;
+	//fim busca um susuario com os parametros de user e password
+
+	$aluno = new Usuario();
+
+	$aluno->setDeslogin("aluno");
+	$aluno->setDessenha("@aluno");
+
+	$aluno->insert();
+
+	echo $aluno;
+
+
  ?>
