@@ -47,14 +47,22 @@
 	// echo $usuario;
 	//fim busca um susuario com os parametros de user e password
 
-	$aluno = new Usuario();
+	//INICIO INSERÇÃO DE DADOS
+	//$aluno = new Usuario("aluno","@alun!");
 
-	$aluno->setDeslogin("aluno");
-	$aluno->setDessenha("@aluno");
+	//$aluno->insert();
+	//FIM DE INSERÇÃO DE DADOS
 
-	$aluno->insert();
+	/*alterar um usuario
+	$usuario = new Usuario();
+	$usuario->loadById(7);
+	$usuario->update("professor","tfkutfkgf");
+	echo $usuario;
+	*///fim alterar um usuario
 
-	echo $aluno;
-
+	$usuario = new Usuario();
+	$usuario->loadById(7);
+	$usuario->delete();
+	echo $usuario;
 
  ?>
